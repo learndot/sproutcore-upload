@@ -42,7 +42,7 @@ SC.FileInputView = SC.View.extend(SC.Control, {
 
     didCreateLayer: function () {
         SC.Event.add(this.$()[0], 'change', this, this.change);
-        SC.Event.add(this.$()[0], 'blur', this, this.blur);
+        SC.Event.add(this.$()[0], 'focus', this, this.focus);
 
         // IE is stupid
         if (SC.browser.isIE) {
@@ -56,18 +56,45 @@ SC.FileInputView = SC.View.extend(SC.Control, {
 
     willDestroyLayer: function () {
         SC.Event.remove(this.$()[0], 'change', this, this.change);
-        SC.Event.remove(this.$()[0], 'blur', this, this.blur);
+        SC.Event.remove(this.$()[0], 'focus', this, this.focus);
     },
 
     didBecomeFirstResponder: function () {
         this.$input().focus();
     },
 
-    blur: function (evt) {
-        var nextKeyView = this.get('nextValidKeyView');
-        if (nextKeyView) {
-            nextKeyView.becomeFirstResponder();
+    focus: function (evt) {
+        var scroller = this.$().closest('.sc-container-view'),
+            stored = scroller.scrollTop();
+
+        this.invokeLast(function () {
+            scroller.scrollTop(stored);
+            this.scrollToVisible();
+        });
+    },
+
+    insertTab: function () {
+        this.getPath('nextValidKeyView').becomeFirstResponder();
+        this.$().blur();
+        return YES;
+    },
+
+    insertBacktab: function () {
+        this.getPath('previousValidKeyView').becomeFirstResponder();
+        this.$().blur();
+        return YES;
+    },
+
+    keyDown: function (evt) {
+        return this.isSpace(evt) || this.interpretKeyEvents(evt) || this.performKeyEquivalent(evt.commandCodes()[0], evt);
+    },
+
+    isSpace: function (evt) {
+        var ret = evt.which === 32;
+        if (ret) {
+            this.$().click();
         }
+        return ret;
     },
 
     change: function () {

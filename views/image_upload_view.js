@@ -163,8 +163,9 @@ SC.ImageUploadView = SC.View.extend({
         this.set('result', SC.Object.create(JSON.parse(response.get('body'))));
     },
 
-// **************************************************
-// views
+    // **************************************************
+    // views
+    //
 
     uploadForm: SC.UploadForm.extend({
         uploadForm: SC.outlet('parentView.url'),
@@ -172,7 +173,12 @@ SC.ImageUploadView = SC.View.extend({
             this.setPath('parentView.isUploading', YES);
         }.observes('isUploading'),
         accept: 'image/*',
-        delegate: SC.outlet('parentView')
+        delegate: SC.outlet('parentView'),
+
+        input: SC.FileInputView.extend({
+            isEnabledBinding: SC.Binding.oneWay('.parentView.isEnabled'),
+            accept: SC.outlet('parentView.accept')
+        })
     }),
 
     spinnerView: SC.SpinnerView.extend({
