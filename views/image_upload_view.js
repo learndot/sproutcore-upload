@@ -14,7 +14,7 @@ SC.ImageUploadView = SC.View.extend({
 
     classNames: 'sc-image-upload-view',
 
-    classNameBindings: ['isActive:active', 'hasValue:has-value'],
+    classNameBindings: ['isActive:active', 'hasValue:has-value', 'hasFocus:focus'],
 
     displayProperties: ['imageUrl'],
 
@@ -33,6 +33,8 @@ SC.ImageUploadView = SC.View.extend({
     uploadOnChange: YES,
 
     isUploading: NO,
+
+    hasFocusBinding: SC.Binding.oneWay('.uploadForm.input.isFirstResponder'),
 
     /**
      * Adds our icon dom object

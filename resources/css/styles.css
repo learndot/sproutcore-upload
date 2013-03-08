@@ -5,6 +5,10 @@ $theme.sc-view.sc-image-upload-view {
     background-size: cover;
     cursor: pointer;
 
+    &.focus {
+        @include box-shadow(0px 0px 5px 2px #72c5db);
+    }
+
     &:hover {
         background-color: #e7e7e7;
 
@@ -50,3 +54,6 @@ $theme.sc-file-field-input-view {
           cursor: pointer !important;
       }
 
+$theme.sc-file-chooser-view {
+          overflow: visible;
+      }

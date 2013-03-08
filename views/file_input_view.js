@@ -33,6 +33,8 @@ SC.FileInputView = SC.View.extend(SC.Control, {
 
     accept: '',
 
+    keyEquivalent: 'enter',
+
     // This helper gets us isEnabled functionality from the SC.Control mixin
     $input: function () {
         return this.$();
@@ -40,6 +42,7 @@ SC.FileInputView = SC.View.extend(SC.Control, {
 
     didCreateLayer: function () {
         SC.Event.add(this.$()[0], 'change', this, this.change);
+        SC.Event.add(this.$()[0], 'blur', this, this.blur);
 
         // IE is stupid
         if (SC.browser.isIE) {
@@ -48,6 +51,22 @@ SC.FileInputView = SC.View.extend(SC.Control, {
                 evt.target.click();
                 evt.target.click();
             };
+        }
+    },
+
+    willDestroyLayer: function () {
+        SC.Event.remove(this.$()[0], 'change', this, this.change);
+        SC.Event.remove(this.$()[0], 'blur', this, this.blur);
+    },
+
+    didBecomeFirstResponder: function () {
+        this.$input().focus();
+    },
+
+    blur: function (evt) {
+        var nextKeyView = this.get('nextValidKeyView');
+        if (nextKeyView) {
+            nextKeyView.becomeFirstResponder();
         }
     },
 

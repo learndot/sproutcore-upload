@@ -16,6 +16,8 @@ sc_require('views/file_input_view');
  */
 SC.FileChooserView = SC.View.extend({
 
+    classNames: 'sc-file-chooser-view',
+
     childViews: ['buttonView', 'labelView', 'form'],
 
     url: '',
@@ -57,13 +59,15 @@ SC.FileChooserView = SC.View.extend({
     buttonView: SC.ButtonView.extend({
         layout: SC.outlet('parentView.buttonLayout'),
         controlSize: SC.outlet('parentView.controlSize'),
+        classNameBindings: ['hasFocus:focus'],
         icon: 'cloud-upload',
         title: function () {
             return this.get('isUploading') ? this.getPath('parentView.uploadingText') : this.getPath('parentView.buttonTitle');
         }.property('isUploading'),
         isUploadingBinding: SC.Binding.oneWay('.parentView.form.isUploading'),
         isActiveBinding: SC.Binding.oneWay('.parentView.form.isActive'),
-        isEnabledBinding: SC.Binding.oneWay('.isUploading').not()
+        isEnabledBinding: SC.Binding.oneWay('.isUploading').not(),
+        hasFocusBinding: SC.Binding.oneWay('.parentView.form.input.isFirstResponder')
     }),
 
     labelView: SC.LabelView.extend({
