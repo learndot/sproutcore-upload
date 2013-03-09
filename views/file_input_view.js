@@ -85,6 +85,11 @@ SC.FileInputView = SC.View.extend(SC.Control, {
         return YES;
     },
 
+    insertNewline: function () {
+        this.$().click();
+        return YES;
+    },
+
     keyDown: function (evt) {
         return this.isSpace(evt) || this.interpretKeyEvents(evt) || this.performKeyEquivalent(evt.commandCodes()[0], evt);
     },
