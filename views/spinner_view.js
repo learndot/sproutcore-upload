@@ -40,29 +40,23 @@ SC.SpinnerView = SC.View.extend({
         },
 
         isVisibleDidChange: function () {
-            var timer = this.get('timer');
-            if (this.getPath('parentView.isVisible')) {
-                timer = SC.Timer.schedule({
-                    target: this,
-                    action: 'animate',
-                    interval: this.get('interval'),
-                    repeats: YES
-                });
-                this.set('timer', timer);
-            }
-            else {
-                if (timer) {
-                    timer.invalidate();
-                }
+            if (this.get('isVisible')) {
+                this.animate();
             }
         }.observes('.parentView.isVisible'),
 
         animate: function () {
             var self = this;
-            var frame = this.requestAnimFrame();
-            frame(function () {
-                self.nextSlice(self);
-            });
+            var animation = function (time) {
+                if (self.getPath('parentView.isVisible')) {
+                    window.requestAnimationFrame(animation);
+                }
+
+                if (Math.round(time) % 2) {
+                    self.nextSlice(self);
+                }
+            };
+            window.requestAnimationFrame(animation);
         },
 
         nextSlice: function (target) {
@@ -75,13 +69,6 @@ SC.SpinnerView = SC.View.extend({
 
             // set new current
             target.set('currentNumber', numberToAdd);
-        },
-
-        // shim layer with setTimeout fallback
-        requestAnimFrame: function () {
-            return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
-                window.setTimeout(callback, 1000 / 60);
-            };
         }
     })
 });
