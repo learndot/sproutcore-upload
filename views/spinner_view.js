@@ -52,7 +52,7 @@ SC.SpinnerView = SC.View.extend({
                     window.requestAnimationFrame(animation);
                 }
 
-                if (Math.round(time) % 2) {
+                if (Math.round(time) % 2 === 0) {
                     self.nextSlice(self);
                 }
             };
