@@ -61,6 +61,13 @@ SC.ImageUploadView = SC.View.extend({
 
     },
 
+    // in some cases the view is appended and then
+    // re appended, in those cases the result should be set to null
+    didAppendToDocument: function(){
+        this.set('result', null);
+        this.set('imageUrl', null);
+    },
+
     /**
      * Extract the image url from the result
      * @param {SC.Object} result
