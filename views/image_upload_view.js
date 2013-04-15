@@ -61,13 +61,6 @@ SC.ImageUploadView = SC.View.extend({
 
     },
 
-    // in some cases the view is appended and then
-    // re appended, in those cases the result should be set to null
-    didAppendToDocument: function(){
-        this.set('result', null);
-        this.set('imageUrl', null);
-    },
-
     /**
      * Extract the image url from the result
      * @param {SC.Object} result
@@ -94,7 +87,7 @@ SC.ImageUploadView = SC.View.extend({
      * @return {SC.Object}
      */
     resultFromValue: function (value) {
-        return this.get('result');
+        return value ? this.get('result') : null;
     },
 
     valueDidChange: function () {
@@ -116,6 +109,9 @@ SC.ImageUploadView = SC.View.extend({
                     this.setIfChanged('value', this.valueFromResult(result));
                 });
             }
+        }
+        else {
+            this.set('imageUrl', '');
         }
     }.observes('*result.status'),
 

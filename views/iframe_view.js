@@ -62,6 +62,7 @@ SC.IFrameView = SC.View.extend({
         else {
             throw 'Unable to retrieve file upload return value. Unknown iframe DOM structure.';
         }
+
         try {
             this.set('result', SC.Object.create(JSON.parse(result)));
         } catch (err) {

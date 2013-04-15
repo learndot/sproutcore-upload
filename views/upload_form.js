@@ -86,6 +86,10 @@ SC.UploadForm = SC.View.extend({
         this.$()[0].submit();
     },
 
+    reset: function () {
+        this.input.reset();
+    },
+
     willDestroyLayer: function () {
         this.removeAllChildren();
     },
