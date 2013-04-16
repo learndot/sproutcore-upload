@@ -46,10 +46,14 @@ SC.FileInputView = SC.View.extend(SC.Control, {
 
         // IE is stupid
         if (SC.browser.isIE) {
+            var $this = this.$(), self;
             this.$()[0].onfocus = function (evt) {
-                evt.target.blur();
-                evt.target.click();
-                evt.target.click();
+                self.invokeNext(function(){
+                    $this.blur();
+                    $this.click();
+                });
+//                evt.target.blur();
+//                evt.target.click();
             };
         }
     },
