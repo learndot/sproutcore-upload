@@ -68,7 +68,7 @@ SC.SpinnerView = SC.View.extend({
             target.$().addClass('spin-' + (numberToAdd + 1)).removeClass('spin-' + (current + 1));
 
             // set new current
-            target.set('currentNumber', numberToAdd);
+            target.currentNumber = numberToAdd;
         }
     })
 });
