@@ -175,8 +175,16 @@ SC.ImageUploadView = SC.View.extend({
         isUploadingDidChange: function () {
             this.setPath('parentView.isUploading', YES);
         }.observes('isUploading'),
+
         accept: 'image/*',
         delegate: SC.outlet('parentView'),
+
+        didAppendToDocument: function () {
+            this.set('value', null);
+            this.$().each(function () {
+                this.reset();
+            });
+        },
 
         input: SC.FileInputView.extend({
             isEnabledBinding: SC.Binding.oneWay('.parentView.isEnabled'),

@@ -102,6 +102,10 @@ SC.FileInputView = SC.View.extend(SC.Control, {
         return ret;
     },
 
+    didAppendToDocument: function () {
+        this.set('value', null);
+    },
+
     change: function () {
         var value = this.$().val();
         // Scrub "C:\fakepath" from value. Some browsers (notably IE and Chrome) use this to mask the
@@ -110,7 +114,9 @@ SC.FileInputView = SC.View.extend(SC.Control, {
         if (SC.typeOf(value) === SC.T_STRING && value.indexOf("C:\\fakepath\\") === 0) {
             value = value.slice("C:\\fakepath\\".length);
         }
-        this.set('value', value);
+        if (value) {
+            this.set('value', value);
+        }
     },
 
     mouseDown: function (evt) {

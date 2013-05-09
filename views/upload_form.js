@@ -76,7 +76,8 @@ SC.UploadForm = SC.View.extend({
     accept: '',
 
     valueDidChange: function () {
-        if (this.get('value') !== 'No File Selected') {
+        var value = this.get('value');
+        if (value && value !== 'No File Selected') {
             this.submit();
         }
     }.observes('value'),
