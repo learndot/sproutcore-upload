@@ -213,6 +213,7 @@ SC.FileFieldView = SC.View.extend(SC.DelegateSupport, {
         // TODO: remove or clear all additional buttons and inputs
         button.set('title', this.get('buttonTitle'));
         label.set('value', '');
+        this._values = null;
     },
 
     _inputChange: function (evt) {
