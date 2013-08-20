@@ -71,6 +71,8 @@ SC.UploadForm = SC.View.extend({
 
     urlBinding: SC.Binding.oneWay('.parentView.url'),
 
+    inputName: 'files[]',
+
     submitOnChange: YES,
 
     accept: '',
@@ -104,7 +106,8 @@ SC.UploadForm = SC.View.extend({
 
     input: SC.FileInputView.extend({
         isEnabledBinding: SC.Binding.oneWay('.parentView.isEnabled'),
-        accept: SC.outlet('parentView.accept')
+        accept: SC.outlet('parentView.accept'),
+        name: SC.outlet('parentView.inputName')
     })
 
 });
