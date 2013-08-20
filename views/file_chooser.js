@@ -32,6 +32,8 @@ SC.FileChooserView = SC.View.extend({
 
     uploadingText: 'Uploading',
 
+    buttonThemeName: 'square',
+
     showLabel: YES,
 
     submit: function () {
@@ -59,6 +61,7 @@ SC.FileChooserView = SC.View.extend({
     buttonView: SC.ButtonView.extend({
         layout: SC.outlet('parentView.buttonLayout'),
         controlSize: SC.outlet('parentView.controlSize'),
+        themeNameBinding: SC.Binding.oneWay('.parentView.buttonThemeName'),
         classNameBindings: ['hasFocus:focus'],
         icon: 'cloud-upload',
         title: function () {
