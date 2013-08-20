@@ -28,6 +28,8 @@ SC.FileChooserView = SC.View.extend({
 
     submitOnChange: YES,
 
+    buttonIcon: 'cloud-upload',
+
     buttonTitle: 'Choose a File',
 
     uploadingText: 'Uploading',
@@ -60,7 +62,7 @@ SC.FileChooserView = SC.View.extend({
         layout: SC.outlet('parentView.buttonLayout'),
         controlSize: SC.outlet('parentView.controlSize'),
         classNameBindings: ['hasFocus:focus'],
-        icon: 'cloud-upload',
+        iconBinding: SC.Binding.oneWay('.parentView.buttonIcon'),
         title: function () {
             return this.get('isUploading') ? this.getPath('parentView.uploadingText') : this.getPath('parentView.buttonTitle');
         }.property('isUploading'),
