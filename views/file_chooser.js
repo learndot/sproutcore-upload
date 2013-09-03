@@ -56,6 +56,8 @@ SC.FileChooserView = SC.View.extend({
         left: 140
     },
 
+    inputName: 'files[]',
+
     buttonView: SC.ButtonView.extend({
         layout: SC.outlet('parentView.buttonLayout'),
         controlSize: SC.outlet('parentView.controlSize'),
@@ -78,7 +80,8 @@ SC.FileChooserView = SC.View.extend({
     }),
 
     form: SC.UploadForm.extend({
-        submitOnChange: SC.outlet('parentView.submitOnChange')
+        submitOnChange: SC.outlet('parentView.submitOnChange'),
+        inputName: SC.outlet('parentView.inputName')
     })
 })
 ;
