@@ -34,6 +34,8 @@ SC.FileChooserView = SC.View.extend({
 
     showLabel: YES,
 
+    controlSize: SC.REGULAR_CONTROL_SIZE,
+
     submit: function () {
         this.get('form').submit();
     },
