@@ -67,10 +67,18 @@ SC.FileInputView = SC.View.extend(SC.Control, {
         var scroller = this.$().closest('.sc-container-view'),
             stored = scroller.scrollTop();
 
-        this.invokeLast(function () {
+        var resetMethod = function() {
             scroller.scrollTop(stored);
             this.scrollToVisible();
-        });
+        }
+
+        if (SC.RunLoop.isRunLoopInProgress()) {
+            this.invokeLast(resetMethod);
+        }
+        else {
+            SC.run(resetMethod, this);
+        }
+        
     },
 
     insertTab: function () {
