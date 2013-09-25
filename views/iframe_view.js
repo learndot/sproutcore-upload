@@ -6,6 +6,9 @@
  -------------------------------------------------------------------------------------------------*/
 
 SC.IFrameView = SC.View.extend({
+
+    result: null,
+
     tagName: 'iframe',
 
     classNames: 'sc-file-field-iframe'.w(),

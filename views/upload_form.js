@@ -90,6 +90,7 @@ SC.UploadForm = SC.View.extend({
     },
 
     reset: function () {
+        this.iframe.set('result', null);
         this.input.reset();
     },
 

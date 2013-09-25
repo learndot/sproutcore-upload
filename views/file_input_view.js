@@ -27,6 +27,11 @@ SC.FileInputView = SC.View.extend(SC.Control, {
 
     value: 'No File Selected',
 
+    reset: function() {
+        this.set('value', null);
+        this.$().val(null);
+    },
+
     isEnabled: YES,
 
     attributeBindings: ['name', 'type', 'multiple', 'accept'],
