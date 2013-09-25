@@ -48,11 +48,6 @@ SC.FileChooserView = SC.View.extend({
         this.get('form').submit();
     },
 
-    init: function () {
-        sc_super();
-        this.adjust('height', SC.Theme.find(SC.defaultTheme).buttonRenderDelegate[this.get('controlSize')].height);
-    },
-
     buttonLayout: {
         top: 0,
         bottom: 0,
